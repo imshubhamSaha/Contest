@@ -1,0 +1,26 @@
+onst concat = function(str1, str2) {
+  if(str1.includes(str2))  {
+    return str1;
+  }
+
+  for(let i=0; i<str1.length; i++) {
+    let str1tail = str1.slice(i);
+    let str2Head = str2.slice(0,str1tail.length);
+
+    if(str1tail === str2Head) {
+      let str1Head = str1.slice(0,i);
+      return str1Head+str2
+    }
+  }
+
+  return str1 + str2
+}
+
+var minimumString = function(a, b, c) {
+  return [[a,b,c], 
+  [a,c,b], 
+  [b,c,a], 
+  [b,a,c], 
+  [c,a,b],
+  [c,b,a]].map(([a,b,c]) => concat(concat(a,b), c)).sort().sort((a,b) => a.length-b.length)[0]
+};
